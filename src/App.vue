@@ -50,11 +50,15 @@
         },
         created() {
             eventBus.$on('quoteAdded', (quote) => {
-                this.quotes.push(quote);
-                this.showSuccess = true;
-                setTimeout(() => {
-                    this.showSuccess = false;
-                }, 2000);
+                if (this.quotes.length < 10) {
+                    this.quotes.push(quote);
+                    this.showSuccess = true;
+                    setTimeout(() => {
+                        this.showSuccess = false;
+                    }, 2000);
+                } else {
+                    alert("You've to delete some quotes!");
+                }
             });
             eventBus.$on('deleteQuote', (i) => {
                 this.quotes.splice(i, 1);
